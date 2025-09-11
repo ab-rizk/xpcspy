@@ -1,4 +1,5 @@
 import { format } from "path";
+import ObjC from 'frida-objc-bridge';
 import { xpcDictionaryGetCount,
     xpcGetType, 
     xpcDataGetBytesPtr, 
@@ -88,10 +89,10 @@ export function debugDescriptionForXPCDictionary(xpcDict: ObjC.Object, count: an
 function hexStringForBytes(bytesPtr: NativePointer, length: Object) {
     const {NSMutableString} = ObjC.classes; 
     const {NSString} = ObjC.classes;
-    let lenghtInt: number = <number> length.valueOf(); 
+    let lengthInt: number = <number> length.valueOf(); 
     let hexString = "";
     let formatString = "%02lx"
-    for (let i = 0; i < length.valueOf(); i++ ) {
+    for (let i = 0; i < lengthInt; i++ ) {
         let byte = bytesPtr.add(i); 
         let byteVal = byte.readU8();
         // send({
