@@ -1,6 +1,6 @@
 import { IFunctionPointer } from './interfaces';
 
-const libxpc = Module.getModuleByName('libxpc.dylib');
+const libxpc = Process.getModuleByName('libxpc.dylib');
 
 const p_xpc_connection_get_name = libxpc.getExportByName('xpc_connection_get_name');
 const p_xpc_dictionary_apply = libxpc.getExportByName('xpc_dictionary_apply');

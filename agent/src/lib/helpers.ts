@@ -61,8 +61,8 @@ export function debugDescriptionForXPCDictionary(xpcDict: ObjC.Object, count: an
                 break;
             case 'OS_xpc_data':
                 const bytesPtr = <NativePointer>xpcDataGetBytesPtr.call(value);
-                const length = <NativePointer>xpcDataGetLength.call(value); 
-                let hexString = hexStringForBytes(bytesPtr,length); 
+                const length = xpcDataGetLength.call(value);
+                let hexString = hexStringForBytes(bytesPtr, length);
                 // let hexString = "empty"; 
                 outString += `<data> { length = ${length.valueOf()} bytes, contents = \n\t\t${hexString}\n\t\t}\n\t`; 
                 break;
@@ -86,13 +86,12 @@ export function debugDescriptionForXPCDictionary(xpcDict: ObjC.Object, count: an
     return outString; 
 }
 
-function hexStringForBytes(bytesPtr: NativePointer, length: Object) {
+function hexStringForBytes(bytesPtr: NativePointer, length: number) {
     const {NSMutableString} = ObjC.classes; 
     const {NSString} = ObjC.classes;
-    let lenghtInt: number = <number> length.valueOf(); 
     let hexString = "";
     let formatString = "%02lx"
-    for (let i = 0; i < length.valueOf(); i++ ) {
+    for (let i = 0; i < length; i++ ) {
         let byte = bytesPtr.add(i); 
         let byteVal = byte.readU8();
         // send({
