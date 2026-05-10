@@ -1,3 +1,4 @@
+import ObjC from 'frida-objc-bridge';
 import { IParsingResult, SupportedBPListFormat } from '../lib/interfaces';
 import { objcObjectDebugDesc } from '../lib/helpers';
 import { xpcGetType, 
