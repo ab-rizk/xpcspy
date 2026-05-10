@@ -1,20 +1,20 @@
 import { IFunctionPointer } from './interfaces';
 
-const libXPCDylib = 'libxpc.dylib';
+const libxpc = Process.getModuleByName('libxpc.dylib');
 
-const p_xpc_connection_get_name = Module.getExportByName(libXPCDylib, 'xpc_connection_get_name');
-const p_xpc_dictionary_apply = Module.getExportByName(libXPCDylib, 'xpc_dictionary_apply');
-const p_xpc_get_type = Module.getExportByName(libXPCDylib, 'xpc_get_type');
-const p_xpc_data_get_bytes_ptr = Module.getExportByName(libXPCDylib, 'xpc_data_get_bytes_ptr');
-const p_xpc_data_get_length = Module.getExportByName(libXPCDylib, 'xpc_data_get_length');
-const p_xpc_connection_send_message = Module.getExportByName(libXPCDylib, 'xpc_connection_send_message');
-const p_xpc_connection_send_message_with_reply = Module.getExportByName(libXPCDylib, 'xpc_connection_send_message_with_reply');
-const p_xpc_connection_send_message_with_reply_sync = Module.getExportByName(libXPCDylib, 'xpc_connection_send_message_with_reply_sync');
-const p_xpc_connection_send_notification = Module.getExportByName(libXPCDylib, 'xpc_connection_send_notification');
+const p_xpc_connection_get_name = libxpc.getExportByName('xpc_connection_get_name');
+const p_xpc_dictionary_apply = libxpc.getExportByName('xpc_dictionary_apply');
+const p_xpc_get_type = libxpc.getExportByName('xpc_get_type');
+const p_xpc_data_get_bytes_ptr = libxpc.getExportByName('xpc_data_get_bytes_ptr');
+const p_xpc_data_get_length = libxpc.getExportByName('xpc_data_get_length');
+const p_xpc_connection_send_message = libxpc.getExportByName('xpc_connection_send_message');
+const p_xpc_connection_send_message_with_reply = libxpc.getExportByName('xpc_connection_send_message_with_reply');
+const p_xpc_connection_send_message_with_reply_sync = libxpc.getExportByName('xpc_connection_send_message_with_reply_sync');
+const p_xpc_connection_send_notification = libxpc.getExportByName('xpc_connection_send_notification');
 const p__xpc_Connection_call_event_handler = DebugSymbol.fromName('_xpc_connection_call_event_handler').address;
 const p___CFBinaryPlistCreate15 = DebugSymbol.fromName('__CFBinaryPlistCreate15').address;
 
-const p_xpc_dictionary_get_count = Module.getExportByName(libXPCDylib, 'xpc_dictionary_get_count');
+const p_xpc_dictionary_get_count = libxpc.getExportByName('xpc_dictionary_get_count');
 
 
 export const xpcConnectionGetName: IFunctionPointer = {
