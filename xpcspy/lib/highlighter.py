@@ -60,9 +60,21 @@ def highlight_message(text: str) -> str:
     """
     Minimal highlighting for the XPC message description string.
     """
-    # Object type tags: <OS_xpc_dictionary>, <OS_xpc_string>, etc.
+    # Standalone wrapper tags: <OS_xpc_dictionary>, <OS_xpc_array>, etc.
     text = re.sub(
-        r"(<(OS_xpc_)[a-z_]+>)",
+        r"(<(OS_xpc_)[a-zA-Z0-9_]+>)",
+        rf"{C.YELLOW}\1{C.RESET}",
+        text,
+    )
+    # Wrapper tag openers with colon: <OS_xpc_string:, <OS_xpc_uint64:, etc.
+    text = re.sub(
+        r"(<(OS_xpc_)[a-zA-Z0-9_]+:)",
+        rf"{C.YELLOW}\1{C.RESET}",
+        text,
+    )
+    # Core data type names only: <string: 0x...>, <int64: 0x...>, <dictionary: 0x...>, etc.
+    text = re.sub(
+        r"(?<=<)(string|array|dictionary|int64|uint64|bool|double|date|data|null|connection)(?=:)",
         rf"{C.YELLOW}\1{C.RESET}",
         text,
     )
