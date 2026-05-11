@@ -4,6 +4,7 @@ from collections import OrderedDict
 import frida
 
 from ..lib.types import Event
+from ..lib.highlighter import highlight_symbol, highlight_timestamp, highlight_connection, highlight_message, highlight_divider
 import datetime
 
 class Agent:
@@ -67,11 +68,14 @@ class Agent:
                 if last_event.data == None:
                     return
                 #print(f"Pop {ts}")
-                print('\n' + '-' * 60)
+                print('\n' + highlight_divider('-' * 60))
                 if (self._print_timestamp):
                     date_time = datetime.datetime.fromtimestamp((ts/1000))
-                    print(f"{date_time}")
-                print(f"{last_event.symbol}\n{last_event.data['conn']}\n{last_event.data['message']}")
-                print('-' * 60 + '\n')
+                    print(highlight_timestamp(f"{date_time}"))
+                symbol = highlight_symbol(last_event.symbol)
+                conn = highlight_connection(last_event.data['conn'])
+                message = highlight_message(last_event.data['message'])
+                print(f"{symbol}\n{conn}\n{message}")
+                print(highlight_divider('-' * 60) + '\n')
                 events_stack.pop()
             del self._pending_events[ts]

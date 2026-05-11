@@ -56,7 +56,6 @@ Options:
 * Deserialize data within the parsed `bplist`s recursively.
 * Improve script loading performance, kinda slow for some reason.
 * Add an option to get the address, perhaps ASLR adjusted, for the XPC event handler, by spawning the process and hooking `xpc_connection_set_event_handler`.
-* Add fancy colors.
 * More pretty printing?
 
 
